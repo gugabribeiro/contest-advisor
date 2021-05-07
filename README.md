@@ -1,1 +1,1 @@
-# contest-advisor
+# Contest Advisor
