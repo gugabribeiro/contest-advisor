@@ -2,17 +2,18 @@ import moment from "moment";
 import React, { useState, useEffect } from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
 
-const Info = ({ started, contest }) => {
+const Info = ({ contest }) => {
   const [now, setNow] = useState(Date.now());
 
-  const start = new Date(contest.startTimeInSeconds * 1000);
+  const start = new Date(0);
+  start.setSeconds(contest.startTimeInSeconds);
 
-  const end = new Date(
-    (contest.startTimeInSeconds + contest.durationInSeconds) * 1000
-  );
+  const end = new Date(0);
+  end.setSeconds(contest.startTimeInSeconds + contest.durationInSeconds);
 
   const total = end - start;
   const current = now - start;
+  const started = current >= 0;
   const remaining = moment.duration(Math.max(0, end - now));
 
   const finished = remaining.asMilliseconds() === 0;
