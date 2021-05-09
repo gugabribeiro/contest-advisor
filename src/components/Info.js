@@ -2,7 +2,7 @@ import moment from "moment";
 import React, { useState, useEffect } from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
 
-const Info = ({ contest }) => {
+const Info = ({ started, contest }) => {
   const [now, setNow] = useState(Date.now());
 
   const start = new Date(contest.startTimeInSeconds * 1000);
@@ -28,17 +28,31 @@ const Info = ({ contest }) => {
     <>
       <div className="flex flex-row justify-between items-baseline mb2">
         <h4 className="">{contest.name}</h4>
-        {finished
-          ? "Finished"
-          : moment.utc(remaining.asMilliseconds()).format("HH:mm:ss")}
+        <>
+          {started ? (
+            finished ? (
+              "Finished"
+            ) : (
+              moment.utc(remaining.asMilliseconds()).format("HH:mm:ss")
+            )
+          ) : (
+            <></>
+          )}
+        </>
       </div>
-      <div className="w-100">
-        <ProgressBar
-          animated={!finished}
-          variant={finished ? "success" : "info"}
-          now={(current * 100) / total}
-        />
-      </div>
+      {started ? (
+        <div className="w-100">
+          <ProgressBar
+            animated={!finished}
+            variant={finished ? "success" : "info"}
+            now={(current * 100) / total}
+          />
+        </div>
+      ) : (
+        <div className="flex items-center justify-center mt4">
+          Contest did not started yet
+        </div>
+      )}
     </>
   );
 };

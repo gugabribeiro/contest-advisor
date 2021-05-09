@@ -139,7 +139,7 @@ const Standings = ({ contest }) => {
           );
         }
         return {
-          problem,
+          id: problem,
           tries,
           solved,
           solvedTimeInSeconds,
@@ -162,13 +162,23 @@ const Standings = ({ contest }) => {
       <Table striped bordered responsive>
         <thead>
           <tr>
-            <th style={{ width: "5%" }}>#</th>
+            <th style={{ width: "5%" }}>
+              <div className="w-100 flex justify-center">#</div>
+            </th>
             <th style={{ width: "20%" }}>Contestant</th>
-            <th style={{ width: "5%" }}>Solved</th>
-            <th style={{ width: "10%" }}>Penalty</th>
-            {contest.problems.map((_, index) => (
-              <th>
-                <a href="/">{String.fromCharCode("A".charCodeAt(0) + index)}</a>
+            <th style={{ width: "5%" }}>
+              <div className="w-100 flex justify-center">Solved</div>
+            </th>
+            <th style={{ width: "10%" }}>
+              <div className="w-100 flex justify-center">Penalty</div>
+            </th>
+            {contest.problems.map((id, index) => (
+              <th key={`header_${id}`}>
+                <div className="w-100 flex justify-center">
+                  <a href="/">
+                    {String.fromCharCode("A".charCodeAt(0) + index)}
+                  </a>
+                </div>
               </th>
             ))}
           </tr>
@@ -176,18 +186,31 @@ const Standings = ({ contest }) => {
         <tbody>
           {standings.map((standing, index) => {
             return (
-              <tr>
-                <td>{index + 1}</td>
+              <tr key={standing.contestant}>
+                <td>
+                  <div className="w-100 flex justify-center">{index + 1}</div>
+                </td>
                 <td>{standing.contestant}</td>
-                <td>{standing.totalSolved}</td>
-                <td>{standing.totalPenalty}</td>
+                <td>
+                  <div className="w-100 flex justify-center">
+                    {standing.totalSolved}
+                  </div>
+                </td>
+                <td>
+                  <div className="w-100 flex justify-center">
+                    {standing.totalPenalty}
+                  </div>
+                </td>
                 {standing.problems.map((problem) => {
                   const tries = problem.solved
                     ? problem.tries - 1
                     : problem.tries;
                   return (
-                    <>
-                      <td className={`${problem.solved ? "green" : "red"}`}>
+                    <td
+                      key={`${standing.contestant}-${problem.id}`}
+                      className={`${problem.solved ? "green" : "red"}`}
+                    >
+                      <div className="w-100 flex justify-center">
                         {`${
                           tries > 0 || problem.solved
                             ? problem.solved
@@ -196,8 +219,8 @@ const Standings = ({ contest }) => {
                             : ""
                         }`}
                         {tries > 0 && tries}
-                      </td>
-                    </>
+                      </div>
+                    </td>
                   );
                 })}
               </tr>

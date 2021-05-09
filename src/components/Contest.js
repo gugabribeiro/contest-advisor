@@ -12,14 +12,18 @@ const contest = {
 };
 
 const Contest = () => {
+  const started = Date.now() - new Date(contest.startTimeInSeconds * 1000) >= 0;
+
   return (
     <div className="flex flex-column ph3">
       <div className="mb3">
-        <Info contest={contest} />
+        <Info started={started} contest={contest} />
       </div>
-      <div className="w-100">
-        <Standings contest={contest} />
-      </div>
+      {started && (
+        <div className="w-100">
+          <Standings contest={contest} />
+        </div>
+      )}
     </div>
   );
 };
