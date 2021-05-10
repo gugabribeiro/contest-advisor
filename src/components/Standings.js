@@ -49,6 +49,7 @@ const Standings = ({ contest }) => {
   ).sort(sortStandings);
 
   const fetchStatus = async (contest) => {
+    setError(false);
     setLoading(true);
     const response = await fetch(
       `https://contest-advisor-service.herokuapp.com/api/contests/${contest.id}/status`
