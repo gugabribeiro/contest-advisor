@@ -12,7 +12,12 @@ const Home = () => {
     }
   }, [currentUser, history]);
 
-  return <div className="w-100 pt3 ph4">Welcome to contest advisor</div>;
+  return (
+    <div className="w-100 pt3 ph4">
+      Welcome to contest advisor, a tool to make easy the creation of
+      programming contests
+    </div>
+  );
 };
 
 export default Home;
