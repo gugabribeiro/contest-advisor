@@ -26,6 +26,7 @@ const CreateContest = ({ onContestCreated, ...props }) => {
   const { currentUser } = useAuth();
   const [count, setCount] = useState(0);
   const [topics, setTopics] = useState([]);
+  const [strict, setStrict] = useState(false);
   const [loading, setLoading] = useState(false);
   const [contest, setContest] = useState(DEFAULT_CONTEST);
 
@@ -53,6 +54,7 @@ const CreateContest = ({ onContestCreated, ...props }) => {
       );
       if (response.status === 201) {
         setContest(DEFAULT_CONTEST);
+        setStrict(false);
         onContestCreated();
       }
     } catch (err) {}
@@ -71,8 +73,9 @@ const CreateContest = ({ onContestCreated, ...props }) => {
           },
           body: JSON.stringify({
             count,
-            contestants: contest.contestants,
+            strict,
             topics,
+            contestants: contest.contestants,
           }),
         }
       );
@@ -205,7 +208,22 @@ const CreateContest = ({ onContestCreated, ...props }) => {
             </div>
           </div>
           <div className="flex flex-column w-100 mb2">
-            <div className="mb2">Topics</div>
+            <div className="flex flex-row justify-between">
+              <div className="mb2">Topics</div>
+              {topics.length > 0 && (
+                <div className="flex flex-row">
+                  <div className="mr2">Strict</div>
+                  <Form.Check
+                    id="strict"
+                    type="switch"
+                    value={strict}
+                    onChange={() => {
+                      setStrict(!strict);
+                    }}
+                  />
+                </div>
+              )}
+            </div>
             {topics.length > 0 && (
               <div className="flex flex-row flex-wrap mb3">
                 {topics.map((topic) => (
