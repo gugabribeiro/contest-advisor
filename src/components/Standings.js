@@ -9,12 +9,15 @@ import { getRedirectUrl } from "../utils";
 
 const sortStandings = (left, right) => {
   if (left.totalSolved === right.totalSolved) {
+    if (left.totalPenalty === right.totalPenalty) {
+      return left.contestant.localeCompare(right.contestant);
+    }
     return left.totalPenalty < right.totalPenalty ? -1 : 1;
   }
   return left.totalSolved > right.totalSolved ? -1 : 1;
 };
 
-const Standings = ({ contest, finished }) => {
+const Standings = ({ contest }) => {
   const [error, setError] = useState();
   const [status, setStatus] = useState();
   const [loading, setLoading] = useState(true);
@@ -27,11 +30,9 @@ const Standings = ({ contest, finished }) => {
           const { tries, solved, solvedTimeInSeconds } = status[contestant][
             problem
           ];
-          if (tries > 0) {
-            totalPenalty += contest.penalty;
-          }
           if (solved) {
             ++totalSolved;
+            totalPenalty += contest.penalty * (tries - 1);
             totalPenalty += Math.floor(
               (solvedTimeInSeconds - contest.startTimeInSeconds) / 60
             );
