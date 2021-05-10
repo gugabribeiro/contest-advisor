@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Table from "react-bootstrap/Table";
+
+import { getRedirectUrl } from "../utils";
 
 const sortStandings = (left, right) => {
   if (left.totalSolved === right.totalSolved) {
@@ -11,7 +14,7 @@ const sortStandings = (left, right) => {
   return left.totalSolved > right.totalSolved ? -1 : 1;
 };
 
-const Standings = ({ contest }) => {
+const Standings = ({ contest, finished }) => {
   const [error, setError] = useState();
   const [status, setStatus] = useState();
   const [loading, setLoading] = useState(true);
@@ -68,15 +71,6 @@ const Standings = ({ contest }) => {
     fetchStatus(contest);
   }, [contest]);
 
-  const getRedirectUrl = (contest, id) => {
-    // eslint-disable-next-line no-unused-vars
-    const [_, contestAndProblemId] = id.split("_");
-    const [contestId, problemIndex] = contestAndProblemId.split("-");
-    return contest.redirectUrl
-      .replace("{contestId}", contestId)
-      .replace("{problemIndex}", problemIndex);
-  };
-
   return (
     <div className="w-100">
       {loading ? (
@@ -93,10 +87,8 @@ const Standings = ({ contest }) => {
         <>
           <div className="w-100 mb3">
             <div className="flex flex-row items-center justify-between">
-              <h5>Standings</h5>
-              <div>
-                <Button onClick={() => fetchStatus(contest)}>Refresh</Button>
-              </div>
+              <div className="f3">Standings</div>
+              <Button onClick={() => fetchStatus(contest)}>Refresh</Button>
             </div>
           </div>
           <Table striped bordered responsive>
@@ -118,7 +110,7 @@ const Standings = ({ contest }) => {
                       <a
                         target="_blank"
                         rel="noreferrer"
-                        href={getRedirectUrl(contest, id)}
+                        href={getRedirectUrl(contest.redirectUrl, id)}
                       >
                         {String.fromCharCode("A".charCodeAt(0) + index)}
                       </a>
@@ -159,19 +151,22 @@ const Standings = ({ contest }) => {
                         ? problem.tries - 1
                         : problem.tries;
                       return (
-                        <td
-                          key={`${standing.contestant}-${problem.id}`}
-                          className={`${problem.solved ? "green" : "red"}`}
-                        >
-                          <div className="w-100 flex justify-center">
-                            {`${
-                              tries > 0 || problem.solved
-                                ? problem.solved
-                                  ? "+"
-                                  : "-"
-                                : ""
-                            }`}
-                            {tries > 0 && tries}
+                        <td key={`${standing.contestant}-${problem.id}`}>
+                          <div className="flex flex-column items-center">
+                            <div
+                              className={`w-100 flex justify-center ${
+                                problem.solved ? "green" : "red"
+                              }`}
+                            >
+                              {`${
+                                tries > 0 || problem.solved
+                                  ? problem.solved
+                                    ? "+"
+                                    : "-"
+                                  : ""
+                              }`}
+                              {tries > 0 && tries}
+                            </div>
                           </div>
                         </td>
                       );

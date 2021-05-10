@@ -42,13 +42,17 @@ const Info = ({ contest }) => {
         </>
       </div>
       {started ? (
-        <div className="w-100">
-          <ProgressBar
-            animated={!finished}
-            variant={finished ? "success" : "info"}
-            now={(current * 100) / total}
-          />
-        </div>
+        finished ? (
+          <></>
+        ) : (
+          <div className="w-100">
+            <ProgressBar
+              animated={!finished}
+              variant={finished ? "danger" : "info"}
+              now={(current * 100) / total}
+            />
+          </div>
+        )
       ) : (
         <div className="flex items-center justify-center mt4">
           Contest did not started yet

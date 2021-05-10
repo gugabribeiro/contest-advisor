@@ -32,7 +32,7 @@ const Contest = ({
   }, [id]);
 
   return (
-    <div className="flex flex-column items-center ph3">
+    <div className="w-100 pt3 ph4 flex flex-column items-center">
       {loading ? (
         <Spinner animation="border" />
       ) : error || !contest ? (

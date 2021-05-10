@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const Home = () => {
-  return (
-    <div className="w-100 h-75 flex items-center justify-center mt3">
-      <div className="flex flex-column tc w-50 justify-center">
-        Welcome to Contest Advisor a platform to make easy the creation and
-        management of contests (not only for competitive programmers)
-      </div>
-    </div>
-  );
+  const history = useHistory();
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    if (currentUser) {
+      history.push("/contests");
+    }
+  }, [currentUser, history]);
+
+  return <div className="w-100 pt3 ph4">Welcome to contest advisor</div>;
 };
 
 export default Home;
