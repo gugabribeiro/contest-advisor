@@ -24,7 +24,9 @@ const Standings = ({ contest }) => {
           const { tries, solved, solvedTimeInSeconds } = status[contestant][
             problem
           ];
-          totalPenalty += contest.penalty;
+          if (tries > 0) {
+            totalPenalty += contest.penalty;
+          }
           if (solved) {
             ++totalSolved;
             totalPenalty += Math.floor(
