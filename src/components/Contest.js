@@ -5,6 +5,8 @@ import Spinner from "react-bootstrap/Spinner";
 import Info from "./Info";
 import Standings from "./Standings";
 
+import { contestStarted } from "../utils";
+
 const Contest = ({
   match: {
     params: { id },
@@ -52,9 +54,11 @@ const Contest = ({
               }}
             />
           </div>
-          <div className="w-100">
-            <Standings contest={contest} />
-          </div>
+          {contestStarted(contest) && (
+            <div className="w-100">
+              <Standings contest={contest} />
+            </div>
+          )}
         </>
       )}
     </div>

@@ -44,8 +44,6 @@ const Contests = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
-  console.log(contests, loading);
-
   return (
     <div className="w-100 pt3 ph4 flex flex-column">
       <div className="f3">Contests</div>
@@ -89,7 +87,7 @@ const Contests = () => {
                       {contest.contestants.map((contestant) => (
                         <div
                           key={`${contest.id}_${contestant}`}
-                          className="mr2"
+                          className="mr2 mb2"
                         >
                           <Badge pill variant="secondary">
                             <div className="pa1 f6">{contestant}</div>

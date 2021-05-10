@@ -14,3 +14,15 @@ export const getProblemName = (problemId) => {
     1
   )} ${contestId}${problemIndex}`;
 };
+
+export const contestStarted = (contest) => {
+  const now = Date.now();
+
+  const start = new Date(0);
+  start.setSeconds(contest.startTimeInSeconds);
+
+  const end = new Date(0);
+  end.setSeconds(contest.startTimeInSeconds + contest.durationInSeconds);
+
+  return now - start >= 0;
+};
