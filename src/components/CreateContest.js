@@ -127,7 +127,16 @@ const CreateContest = ({ onContestCreated, ...props }) => {
               />
             </div>
             <div className="flex flex-column w-25 mr3">
-              <div className="mb2">Start</div>
+              <div className="mb2">
+                Start{" "}
+                <a
+                  href="https://www.epochconverter.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  (Epoch)
+                </a>
+              </div>
               <Form.Control
                 required
                 type="number"
@@ -140,7 +149,7 @@ const CreateContest = ({ onContestCreated, ...props }) => {
               />
             </div>
             <div className="flex flex-column w-25 mr3">
-              <div className="mb2">Duration</div>
+              <div className="mb2">Duration (seconds)</div>
               <Form.Control
                 required
                 type="number"
