@@ -1,6 +1,6 @@
 # Contest Advisor
 
-**Contest Advisor** is a tool to provide programming contest management.
+**Contest Advisor** is a tool to provide programming contest creation, automatic problemset selection and contest standings using problems from Codeforces (soon other Online Judges will be available).
 
 - To use it you will only need to login with your _Google Account_ and start creating contests providing the users who are going to participate, the topics of the problems you want to consider, the number of problems and let the platform select the best problemset for you according to the data provided.
 
