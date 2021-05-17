@@ -11,3 +11,7 @@
 The **Problem Selection** feature provide an automatic way to select a problemset for a group of users and topics known beforehand. By _balanced_, we mean a problemset that will be fun for all the users that it is destined to, in other words, the less experienced user will be capable to solve some problems, practicing, having fun and learn and also the most experienced ones will be challenged with the chosen set. 
 
 So, everyone wins :tada:
+
+## Important links:
+- [Contest Advisor Service Repository](https://github.com/gugabribeiro/contest-advisor-service)
+- [Contest Advisor Codeforces Connector](https://github.com/gugabribeiro/codeforces-connector)
