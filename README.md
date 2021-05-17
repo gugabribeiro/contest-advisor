@@ -15,4 +15,4 @@ So, everyone wins :tada:
 ## Important links:
 - [Contest Advisor Web Platform](https://contest-advisor.herokuapp.com/)
 - [Contest Advisor Service Repository](https://github.com/gugabribeiro/contest-advisor-service)
-- [Contest Advisor Codeforces Connector](https://github.com/gugabribeiro/codeforces-connector)
+- [Contest Advisor Codeforces Connector Repository](https://github.com/gugabribeiro/codeforces-connector)
